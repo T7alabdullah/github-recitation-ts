@@ -18,7 +18,7 @@ export default (req: Request, res: Response): void => {
   }
 
   const fibN = fibonacci(num);  // Compute the Fibonacci number safely
-  let result = `fibonacci(${num}) is ${fibN}`;  // Prepare the response
+  const result = `fibonacci(${num}) is ${fibN}`;  // Use const instead of let
 
   res.send(result);
 };
