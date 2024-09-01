@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import fibonacci from './fib';
 
 export default (req: Request, res: Response): void => {
-  const numString = req.params.num as unknown as string;  // Ensure it's treated as a string without explicit type
+  const numString = req.params.num as unknown as string;  // Ensure it's treated as a string
   const num = parseInt(numString, 10);  // Safely parse num as an integer
 
   // Check if num is a valid number after parsing
@@ -11,13 +11,14 @@ export default (req: Request, res: Response): void => {
     return;
   }
 
-  const fibN = fibonacci(num);  // Type inference is sufficient
-  let result = `fibonacci(${num}) is ${fibN}`;  // Remove explicit type annotation
-
-  if (fibN < 0) {
-    result = `fibonacci(${num}) is undefined`;
+  // Check if the number is negative
+  if (num < 0) {
+    res.send(`fibonacci(${num}) is undefined`);
+    return;
   }
 
-  res.send(result);
+  const fibN = fibonacci(num);  // Compute the Fibonacci number safely
+  let result = `fibonacci(${num}) is ${fibN}`;  // Prepare the response
 
+  res.send(result);
 };
