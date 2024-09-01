@@ -19,4 +19,5 @@ export default (req: Request, res: Response): void => {
   }
 
   res.send(result);
+
 };
