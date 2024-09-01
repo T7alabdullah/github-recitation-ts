@@ -5,14 +5,21 @@ function fibonacci(n: number): number {
   }
 
   if (n < 0) {
-    return -1;
+    throw new RangeError('Input must be a non-negative integer');
   } else if (n === 0) {
     return 0;
   } else if (n === 1) {
     return 1;
   }
 
-  return fibonacci(n - 1) + fibonacci(n - 2); // Both operands are guaranteed to be numbers
+  // Using an iterative approach to avoid recursion overhead
+  let a = 0, b = 1, temp;
+  for (let i = 2; i <= n; i++) {
+    temp = a + b;
+    a = b;
+    b = temp;
+  }
+  return b;
 }
 
 export default fibonacci;
