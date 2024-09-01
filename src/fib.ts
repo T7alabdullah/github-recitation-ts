@@ -12,9 +12,9 @@ function fibonacci(n: number): number {
     return 1;
   }
 
-  // Explicitly type variables to avoid 'any' type issues
-  let a: number = 0;
-  let b: number = 1;
+  // Removed redundant type annotations
+  let a = 0;
+  let b = 1;
   let temp: number;
 
   for (let i = 2; i <= n; i++) {
