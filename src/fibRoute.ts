@@ -1,18 +1,22 @@
 // Endpoint for querying the fibonacci numbers
 
-const fibonacci = require("./fib");
+// src/fibRoute.ts
 
-export default (req, res) => {
-  // Safely parse the number and handle cases where num is not a valid number
-  const num = parseInt(req.params.num, 10);
+import { Request, Response } from 'express';
+import { fibonacci } from './fib';  // Use ES6 import syntax
 
-  // Check if num is a valid number after parsing
+export default (req: Request, res: Response): void => {
+  const numString = req.params.num; // req.params is correctly typed by Express
+  const num = parseInt(numString, 10);  // Explicitly convert string to number
+
+  // Validate num after parsing
   if (isNaN(num)) {
-    return res.status(400).send("Invalid input. Please provide a valid number.");
+    res.status(400).send('Invalid input. Please provide a valid number.');
+    return;
   }
 
-  const fibN = fibonacci(num);
-  let result = `fibonacci(${num}) is ${fibN}`;
+  const fibN: number = fibonacci(num);  // Ensure the result of fibonacci is a number
+  let result: string = `fibonacci(${num}) is ${fibN}`;
 
   if (fibN < 0) {
     result = `fibonacci(${num}) is undefined`;
@@ -20,5 +24,6 @@ export default (req, res) => {
 
   res.send(result);
 };
+
 
 // source CHATGPT
