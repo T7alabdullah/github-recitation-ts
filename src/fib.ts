@@ -24,5 +24,4 @@ function fibonacci(n: number): number {
   }
   return b;
 }
-
 export default fibonacci;
